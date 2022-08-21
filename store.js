@@ -13,9 +13,9 @@ function ready() {
     let button = removeBtn[i];
     button.addEventListener("click", removeCartItem);
   }
-  const quantityInfuts = document.querySelectorAll(".cart-quantity-input");
-  for (let i = 0; i < quantityInfuts.length; i++) {
-    let input = quantityInfuts[i];
+  const quantityInputs = document.querySelectorAll(".cart-quantity-input");
+  for (let i = 0; i < quantityInputs.length; i++) {
+    let input = quantityInputs[i];
     input.addEventListener("change", quantityChanged);
   }
   const addToCartButtons = document.querySelectorAll(".shop-item-button");
@@ -28,15 +28,7 @@ function ready() {
 
 //---------helper function---------------
 //--------------------------------------
-function addToCartClicked(event) {
-  var button = event.target;
-  var shopItem = button.parentElement.parentElement;
-  var title = shopItem.getElementsByClassName("shop-item-title")[0].innerText;
-  var price = shopItem.getElementsByClassName("shop-item-price")[0].innerText;
-  var imageSrc = shopItem.getElementsByClassName("shop-item-image")[0].src;
-  addItemToCart(title, price, imageSrc);
-  updateCartTotal();
-}
+
 function addToCartClicked(event) {
   const button = event.target;
   /*
@@ -53,7 +45,7 @@ function addToCartClicked(event) {
   const shopItem = button.parentElement.parentElement;
   const title = shopItem.querySelector(".shop-item-title").innerText;
   const imageSrc = shopItem.querySelector(".shop-item-image").getAttribute("src");
-  const price = shopItem.querySelector(".shop-item-price").innerText.slice(1); // remove $ sign;
+  const price = shopItem.querySelector(".shop-item-price").innerText; // remove $ sign;
   addItemToCart(title, price, imageSrc);
   updateCartTotal();
 }
