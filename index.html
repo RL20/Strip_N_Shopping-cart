@@ -4,8 +4,37 @@
     <title>The X Store</title>
     <meta name="description" content="This is the description" />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      // function myFunction() {
+      //   //with onclick
+      //   /* Get the text field */
+      //   var copyText = document.getElementById("myInput");
+
+      //   /* Select the text field */
+      //   copyText.select();
+      //   copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      //   /* Copy the text inside the text field */
+      //   navigator.clipboard.writeText(copyText.value);
+
+      //   /* Alert the copied text */
+      //   alert("Copied the text: " + copyText.value);
+      // }
+
+      function script() {
+        const couponsBtns = document.querySelectorAll(".info-btn");
+        for (let i = 0; i < couponsBtns.length; i++) {
+          const element = couponsBtns[i];
+          element.addEventListener("click", (event) => {
+            const copy = event.target.previousElementSibling.innerText;
+            navigator.clipboard.writeText(copy);
+            alert(`The coupon ${copy} has been copied  `);
+          });
+        }
+      }
+    </script>
   </head>
-  <body>
+  <body onload="script();">
     <header class="main-header">
       <nav class="nav main-nav">
         <ul>
