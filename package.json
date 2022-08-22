@@ -1,0 +1,31 @@
+{
+  "name": "strip_n_shopping-cart",
+  "version": "1.0.0",
+  "description": "Testing and experimenting with the Strip system\r implementing Node JS code and connecting a shopping cart on the client side",
+  "main": "store.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RL20/Strip_N_Shopping-cart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RL20/Strip_N_Shopping-cart/issues"
+  },
+  "homepage": "https://github.com/RL20/Strip_N_Shopping-cart#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "stripe": "^10.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1"
+  }
+}
