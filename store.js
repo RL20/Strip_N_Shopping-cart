@@ -109,6 +109,8 @@ function updateCartTotal() {
   totalElement.innerText = `$${total.toFixed(2)}`;
 }
 function purchaseClicked() {
+  const total = Number(document.querySelector(".cart-total").lastElementChild.innerText.replace("$", ""));
+  if (total === 0) return;
   alert("Thank you for your purchase");
   var cartItems = document.querySelector(".cart-items");
   while (cartItems.hasChildNodes()) {
