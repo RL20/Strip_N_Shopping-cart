@@ -1,0 +1,12 @@
+{
+  "pcHardware": [
+    { "id": 1, "name": "Item 1", "price": 22099, "img": "Item 1.jpg" },
+    { "id": 2, "name": "Item 2", "price": 6099, "img": "Item 2.jpg" },
+    { "id": 3, "name": "Item 3", "price": 26099, "img": "Item 3.jpg" },
+    { "id": 4, "name": "Item 4", "price": 29999, "img": "Item 4.jpg" }
+  ],
+  "accessories": [
+    { "id": 5, "name": "Usb Hub", "price": 1999, "img": "acc 1.jpg" },
+    { "id": 6, "name": "Usb Cable", "price": 699, "img": "acc 2.jpg" }
+  ]
+}
