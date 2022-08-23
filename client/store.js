@@ -46,25 +46,29 @@ function addToCartClicked(event) {
   const title = shopItem.querySelector(".shop-item-title").innerText;
   const imageSrc = shopItem.querySelector(".shop-item-image").getAttribute("src");
   const price = shopItem.querySelector(".shop-item-price").innerText; // remove $ sign;
-  addItemToCart(title, price, imageSrc);
+  // const id = shopItem.querySelector("[data-item-id]");
+  const id = shopItem.dataset.itemId;
+  addItemToCart(title, price, imageSrc, id);
   updateCartTotal();
 }
 
-function addItemToCart(title, price, imageSrc) {
+function addItemToCart(title, price, imageSrc, id) {
   const cartRow = document.createElement("div");
   cartRow.classList.add("cart-row");
-  var cartItems = document.querySelector(".cart-items");
+  //! cartRow.querySelector("[data-item-id]")=id;
+  cartRow.dataset.itemId = id;
+  const cartItems = document.querySelector(".cart-items");
   console.log(cartItems);
   //check if item added alredy so the same item won't repeat----
-  var cartItemNames = cartItems.querySelectorAll(".cart-item-title");
-  for (var i = 0; i < cartItemNames.length; i++) {
+  const cartItemNames = cartItems.querySelectorAll(".cart-item-title");
+  for (let i = 0; i < cartItemNames.length; i++) {
     if (cartItemNames[i].innerText == title) {
       alert("This item is already added to the cart");
       return;
     }
   }
   //-----------------
-  var cartRowContents = `
+  const cartRowContents = `
       <div class="cart-item cart-column">
           <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
           <span class="cart-item-title">${title}</span>
@@ -108,13 +112,38 @@ function updateCartTotal() {
   let totalElement = document.querySelector(".cart-total-price");
   totalElement.innerText = `$${total.toFixed(2)}`;
 }
+const stripeHandler = StripeCheckout.configure({
+  key: stripePublicKey,
+  locale: "en",
+  token: function (token) {
+    const items = [];
+    const cartItemContainer = document.querySelector(".cart-items");
+    const cartRows = cartItemContainer.querySelectorAll(".cart-row");
+    for (let i = 0; i < cartRows.length; i++) {
+      let cartRow = cartRows[i];
+      const quantityElement = cartRow.querySelector("cart-quantity-input");
+      const quantity = quantityElement.value;
+      const id = cartRow.dataset.itemId;
+      items.push({
+        id: id,
+        quantity: quantity,
+      });
+    }
+  },
+});
 function purchaseClicked() {
-  const total = Number(document.querySelector(".cart-total").lastElementChild.innerText.replace("$", ""));
-  if (total === 0) return;
-  alert("Thank you for your purchase");
-  var cartItems = document.querySelector(".cart-items");
-  while (cartItems.hasChildNodes()) {
-    cartItems.removeChild(cartItems.firstChild);
-  }
-  updateCartTotal();
+  // const total = Number(document.querySelector(".cart-total").lastElementChild.innerText.replace("$", ""));
+  // if (total === 0) return;
+  // alert("Thank you for your purchase");
+  // const cartItems = document.querySelector(".cart-items");
+  // while (cartItems.hasChildNodes()) {
+  //   cartItems.removeChild(cartItems.firstChild);
+  // }
+  // updateCartTotal();
+  const priceElement = document.querySelector(".cart-total-price");
+  const price = parseFloat(priceElement.innerText.replace("$", "")) * 100;
+  console.log(price);
+  stripeHandler.open({
+    amount: price,
+  });
 }
